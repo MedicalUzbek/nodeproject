@@ -23,7 +23,6 @@
 | /api/directors/:director_id/best10movie | `GET` | Empty | The director's top 10 films. |
 iyuiry
 
-
 # Users
 
 | Route | HTTP Verb	 | POST body	 | Description	 |
