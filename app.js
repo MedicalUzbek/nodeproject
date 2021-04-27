@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var musicRouter = require('./routes/music');
 var directorRouter = require('./routes/director');
 
@@ -16,6 +15,14 @@ db()
 
 
 var app = express();
+
+const config = require('./config');
+
+app.set('api_secret_key', config.api_secret_key);
+
+
+const tokenverify = require('./middleware/toke-verify')
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/music', tokenverify);
 app.use('/music', musicRouter);
 app.use('/director', directorRouter);
 
